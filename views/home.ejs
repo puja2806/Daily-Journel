@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('head.ejs') %>
+
+<body>
+    <%- include('header.ejs') %>
+
+    <div class= "paragraph">
+        <h1 class = bold-heading>Home</h1>
+        <p class= "para"> Daily Journal Corporation is an American publishing company and technology company headquartered in Los Angeles, California. The company has offices in Corona, Oakland, Riverside, Sacramento, San Diego, San Francisco, San Jose, and Santa Ana in California, and in Denver, Colo.; Logan, Utah; and Phoenix, Arizona. The Daily Journal Corporation has been publicly traded since 1987 on the NASDAQ under DJCO. Its chairman is Charles T. Munger, who is also vice chairman of Berkshire Hathaway.[2][3][4] J.P. Guerin is vice-chairman of the Daily Journal Corporation. Gerald L. Salzman is chief executive officer and president. The original newspaper, The Daily Court Journal (Los Angeles), began publication in 1888. Charles T. Munger purchased the paper in 1977 and through a series of acquisitions and organic growth built it into a group of newspapers and websites that provide information on the legal industry, real estate and general business.</p>
+    </div>
+    
+
+    <% if(blogss.length > 0) { %>
+        <% blogss.forEach((item) => { %>
+            
+            <div class = "delete-item">
+                <a class= "single" href = "/post/<%= item._id %>">
+                    <h3 class = "parainfo"><%= item.title %></h3>
+                    <p class = "show-read-more"><%= item.post %></p>
+                </a>
+                
+            </div>
+            
+            
+        <% }) %>
+    <% } %>
+    
+
+    
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var maxLength = 100;
+            $(".show-read-more").each(function(){
+                var myStr = $(this).text();
+                if($.trim(myStr).length > maxLength){
+                    var newStr = myStr.substring(0, maxLength);
+                    var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                    $(this).empty().html(newStr);
+                    $(this).append(' <a class="read-more">...Read More</a>');
+                    $(this).append('<span class="more-text">' + removedStr + '</span>');
+                }
+            });
+            
+        });
+
+       
+    </script>
+
+</body>
+
+<%- include('footer.ejs') %>
+</html>
